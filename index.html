@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0d1b2a">
   <title>باب خير | رمضان كريم</title>
   <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Cairo', sans-serif;
       background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
@@ -27,15 +24,8 @@
       opacity: 0.07;
       z-index: -2;
     }
-    .container {
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 16px;
-    }
-    .hero {
-      text-align: center;
-      padding: 50px 16px 30px;
-    }
+    .container { max-width: 520px; margin: 0 auto; padding: 16px; }
+    .hero { text-align: center; padding: 50px 16px 30px; }
     .hero h1 {
       font-family: 'Amiri', serif;
       font-size: clamp(28px, 7.5vw, 44px);
@@ -51,19 +41,18 @@
       max-width: 95%;
       margin: 0 auto 18px;
     }
-    .lantern-container {
-      margin: 20px 0 32px;
-      text-align: center;
-    }
+    .lantern-container { margin: 24px 0 40px; text-align: center; }
     .lantern {
-      width: clamp(110px, 28vw, 160px);
+      width: clamp(120px, 32vw, 180px);
+      max-width: 100%;
       height: auto;
-      filter: drop-shadow(0 6px 16px rgba(245, 158, 11, 0.65));
-      animation: glow 5s ease-in-out infinite alternate;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 20px rgba(245, 158, 11, 0.7));
+      animation: glow 4s ease-in-out infinite alternate;
     }
     @keyframes glow {
-      from { filter: drop-shadow(0 6px 16px rgba(245, 158, 11, 0.45)); }
-      to { filter: drop-shadow(0 10px 28px rgba(245, 158, 11, 0.75)); }
+      from { filter: drop-shadow(0 6px 16px rgba(245, 158, 11, 0.5)); }
+      to   { filter: drop-shadow(0 12px 32px rgba(245, 158, 11, 0.85)); }
     }
     .card {
       background: rgba(30, 41, 59, 0.94);
@@ -98,6 +87,10 @@
       transition: all 0.25s ease;
       font-family: 'Cairo', sans-serif;
     }
+    input:invalid:focus, input:required:invalid {
+      border-color: #f87171;
+      box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.25);
+    }
     input:focus, textarea:focus {
       outline: none;
       border-color: #fde047;
@@ -123,15 +116,11 @@
       box-shadow: 0 6px 20px rgba(217, 119, 6, 0.45);
       touch-action: manipulation;
     }
-    button:hover:not(:disabled),
-    button:active:not(:disabled) {
+    button:hover:not(:disabled), button:active:not(:disabled) {
       transform: translateY(-2px);
       box-shadow: 0 10px 28px rgba(217, 119, 6, 0.6);
     }
-    button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
     #msg {
       text-align: center;
       margin-top: 22px;
@@ -148,10 +137,12 @@
       line-height: 1.6;
     }
     .heart { color: #f87171; }
-    @media (max-width: 360px) {
+
+    @media (max-width: 380px) {
       .container { padding: 12px; }
-      .hero { padding-top: 40px; padding-bottom: 20px; }
-      .card { padding: 20px 16px; border-radius: 16px; }
+      .hero { padding: 40px 12px 20px; }
+      .lantern { width: clamp(100px, 38vw, 140px); }
+      .card { padding: 20px 14px; border-radius: 16px; }
       button { padding: 14px; font-size: 1rem; }
     }
   </style>
@@ -161,25 +152,26 @@
   <div class="hero">
     <h1>﴿ وَمَا تُقَدِّمُوا لِأَنفُسِكُم مِّنْ خَيْرٍ تَجِدُوهُ عِندَ اللَّهِ ﴾</h1>
     <p>﴿الَّذِينَ يُنْفِقُونَ أَمْوَالَهُمْ بِاللَّيْلِ وَالنَّهَارِ سِرًّا وَعَلَانِيَةً فَلَهُمْ أَجْرُهُمْ عِنْدَ رَبِّهِمْ وَلَا خَوْفٌ عَلَيْهِمْ وَلَا هُمْ يَحْزَنُونَ﴾</p>
-   
+  
     <div class="lantern-container">
       <img
-        src="https://www.pngwing.com/en/free-png-vhthe/download?size=1024"
-        alt="فانوس رمضان"
+        src="https://www.freeiconspng.com/uploads/ramadan-lantern-for-design-png-13.png"
+        alt="فانوس رمضان كريم"
         class="lantern"
-        onerror="this.src='https://via.placeholder.com/150x200/1b263b/facc15?text=فانوس+رمضان'; this.alt='فانوس رمضان (بديل)';"
+        loading="lazy"
+        onerror="this.src='https://www.clipartmax.com/png/middle/236-2366075_lamp-clipart-ramadan-ramadan-lantern-png.png';"
       >
     </div>
   </div>
 
   <div class="card">
     <h2>سيب طلبك أو احتياجك</h2>
-   
+  
     <form id="helpForm">
-      <label for="name">الاسم</label>
+      <label for="name">الاسم <span style="color:#f87171;">*</span></label>
       <input type="text" id="name" placeholder="اكتب اسمك" required>
 
-      <label for="phone">رقم الموبايل</label>
+      <label for="phone">رقم الموبايل <span style="color:#f87171;">*</span></label>
       <input type="tel" id="phone" placeholder="اكتب رقم التواصل" required pattern="[0-9]{10,11}">
 
       <label for="address">العنوان بالتفصيل</label>
@@ -209,14 +201,33 @@ const btn = document.getElementById("submitBtn");
 
 btn.addEventListener("click", async function(e) {
   e.preventDefault();
+
+  // التحقق من الحقول الإجبارية قبل الإرسال
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+
+  if (!name) {
+    msg.style.color = "#f87171";
+    msg.textContent = "من فضلك اكتب اسمك";
+    document.getElementById("name").focus();
+    return;
+  }
+
+  if (!phone || phone.length < 10) {
+    msg.style.color = "#f87171";
+    msg.textContent = "من فضلك اكتب رقم الموبايل صح (10 أو 11 رقم)";
+    document.getElementById("phone").focus();
+    return;
+  }
+
   btn.disabled = true;
   msg.style.color = "#fde047";
   msg.textContent = "جاري إرسال طلبك... يرجى الانتظار";
 
   const data = {
-    name: document.getElementById("name").value.trim(),
-    phone: document.getElementById("phone").value.trim(),
-    address: document.getElementById("address").value.trim(),
+    name: name,
+    phone: phone,
+    address: document.getElementById("address").value.trim() || "غير محدد",
     cash: document.getElementById("cash").value.trim() || "غير محدد",
     need: document.getElementById("need").value.trim(),
     timestamp: new Date().toLocaleString("ar-EG")
@@ -232,7 +243,6 @@ btn.addEventListener("click", async function(e) {
         body: JSON.stringify(data)
       }
     );
-
     msg.style.color = "#34d399";
     msg.innerHTML = "تم استلام طلبك بنجاح<br>ربنا يتقبل منا ومنكم صالح الأعمال في رمضان 🤍";
     form.reset();
