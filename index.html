@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#0d1b2a">
-  <title>باب خير | رمضان كريم</title>
+  <meta name="theme-color" content="#1a0f0a">
+  <title>باب خير | </title>
   <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Cairo', sans-serif;
-      background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
+      /* gradient سمرا دافئ داكن - ألوان بني غامق دافئة */
+      background: linear-gradient(135deg, #1a0f0a 0%, #2c1a0f 45%, #3d2a1f 100%);
       color: #e0e7ff;
       min-height: 100vh;
       position: relative;
@@ -20,9 +21,12 @@
       content: '';
       position: fixed;
       inset: 0;
-      background: url('https://images.unsplash.com/photo-1589819843851-0e5c0d0d8d8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
-      opacity: 0.07;
+      /* صورة خلفية داكنة رمضانية مناسبة (فانوس + جو ليلي دافئ) */
+      background: url('https://images.unsplash.com/photo-1608509990725-4d4f8b07e0d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover no-repeat fixed;
+      opacity: 0.04; /* خفيفة جدًا عشان ما تغطيش على النصوص */
       z-index: -2;
+      background-attachment: fixed; /* مهم للموبايل - يثبت الخلفية */
+      background-size: cover;
     }
     .container { max-width: 520px; margin: 0 auto; padding: 16px; }
     .hero { text-align: center; padding: 50px 16px 30px; }
@@ -188,7 +192,7 @@
     </form>
 
     <div class="note">
-      بياناتك في أمان تام • نستخدمها فقط للمساعدة والتقرب إلى الله<br>
+      بياناتك في أمان تام • نستخدمها فقط للمساعدتك<br>
       رمضان كريم وكل عام وأنتم بخير <span class="heart">🤍</span>
     </div>
   </div>
@@ -202,7 +206,6 @@ const btn = document.getElementById("submitBtn");
 btn.addEventListener("click", async function(e) {
   e.preventDefault();
 
-  // التحقق من الحقول الإجبارية قبل الإرسال
   const name = document.getElementById("name").value.trim();
   const phone = document.getElementById("phone").value.trim();
 
