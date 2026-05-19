@@ -1,262 +1,502 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#1a0f0a">
-  <title>باب خير | </title>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Cairo', sans-serif;
-      /* gradient سمرا دافئ داكن - ألوان بني غامق دافئة */
-      background: linear-gradient(135deg, #1a0f0a 0%, #2c1a0f 45%, #3d2a1f 100%);
-      color: #e0e7ff;
-      min-height: 100vh;
-      position: relative;
-      -webkit-tap-highlight-color: transparent;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      /* صورة خلفية داكنة رمضانية مناسبة (فانوس + جو ليلي دافئ) */
-      background: url('https://images.unsplash.com/photo-1608509990725-4d4f8b07e0d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover no-repeat fixed;
-      opacity: 0.04; /* خفيفة جدًا عشان ما تغطيش على النصوص */
-      z-index: -2;
-      background-attachment: fixed; /* مهم للموبايل - يثبت الخلفية */
-      background-size: cover;
-    }
-    .container { max-width: 520px; margin: 0 auto; padding: 16px; }
-    .hero { text-align: center; padding: 50px 16px 30px; }
-    .hero h1 {
-      font-family: 'Amiri', serif;
-      font-size: clamp(28px, 7.5vw, 44px);
-      color: #facc15;
-      text-shadow: 0 3px 10px rgba(250, 204, 21, 0.45);
-      margin-bottom: 14px;
-      line-height: 1.35;
-    }
-    .hero p {
-      font-size: clamp(15px, 4vw, 17.5px);
-      color: #cbd5e1;
-      line-height: 1.65;
-      max-width: 95%;
-      margin: 0 auto 18px;
-    }
-    .lantern-container { margin: 24px 0 40px; text-align: center; }
-    .lantern {
-      width: clamp(120px, 32vw, 180px);
-      max-width: 100%;
-      height: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 8px 20px rgba(245, 158, 11, 0.7));
-      animation: glow 4s ease-in-out infinite alternate;
-    }
-    @keyframes glow {
-      from { filter: drop-shadow(0 6px 16px rgba(245, 158, 11, 0.5)); }
-      to   { filter: drop-shadow(0 12px 32px rgba(245, 158, 11, 0.85)); }
-    }
-    .card {
-      background: rgba(30, 41, 59, 0.94);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(250, 204, 21, 0.2);
-      border-radius: 20px;
-      padding: clamp(24px, 6vw, 32px) clamp(16px, 5vw, 26px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
-    }
-    .card h2 {
-      color: #fde047;
-      font-size: clamp(1.4rem, 5vw, 1.65rem);
-      text-align: center;
-      margin-bottom: 28px;
-      font-weight: 600;
-    }
-    label {
-      display: block;
-      margin: 18px 0 6px;
-      color: #e2e8f0;
-      font-weight: 500;
-      font-size: clamp(0.95rem, 3.8vw, 1.05rem);
-    }
-    input, textarea {
-      width: 100%;
-      padding: clamp(12px, 4vw, 15px) 16px;
-      background: rgba(255,255,255,0.09);
-      border: 1px solid rgba(250, 204, 21, 0.32);
-      border-radius: 10px;
-      color: white;
-      font-size: clamp(0.95rem, 4vw, 1.05rem);
-      transition: all 0.25s ease;
-      font-family: 'Cairo', sans-serif;
-    }
-    input:invalid:focus, input:required:invalid {
-      border-color: #f87171;
-      box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.25);
-    }
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: #fde047;
-      box-shadow: 0 0 0 3px rgba(253, 224, 71, 0.28);
-      background: rgba(255,255,255,0.13);
-    }
-    textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
-    button {
-      width: 100%;
-      padding: clamp(14px, 5vw, 17px);
-      margin-top: 26px;
-      background: linear-gradient(90deg, #d97706, #fbbf24);
-      color: #0f172a;
-      border: none;
-      border-radius: 12px;
-      font-size: clamp(1.05rem, 4.5vw, 1.18rem);
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 6px 20px rgba(217, 119, 6, 0.45);
-      touch-action: manipulation;
-    }
-    button:hover:not(:disabled), button:active:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(217, 119, 6, 0.6);
-    }
-    button:disabled { opacity: 0.5; cursor: not-allowed; }
-    #msg {
-      text-align: center;
-      margin-top: 22px;
-      font-size: clamp(1rem, 4.2vw, 1.1rem);
-      font-weight: 500;
-      line-height: 1.5;
-      min-height: 1.6em;
-    }
-    .note {
-      text-align: center;
-      font-size: clamp(0.82rem, 3.5vw, 0.9rem);
-      color: #94a3b8;
-      margin-top: 24px;
-      line-height: 1.6;
-    }
-    .heart { color: #f87171; }
-
-    @media (max-width: 380px) {
-      .container { padding: 12px; }
-      .hero { padding: 40px 12px 20px; }
-      .lantern { width: clamp(100px, 38vw, 140px); }
-      .card { padding: 20px 14px; border-radius: 16px; }
-      button { padding: 14px; font-size: 1rem; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة المنتجات - جنة</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, sans-serif;
+            background: #f5f5f5;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .password-screen {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 400px;
+            width: 90%;
+        }
+        .password-screen h1 { color: #8a2be2; margin-bottom: 10px; }
+        .password-screen input {
+            width: 100%;
+            padding: 15px;
+            border: 3px solid #ddd;
+            border-radius: 10px;
+            font-size: 24px;
+            text-align: center;
+            letter-spacing: 5px;
+            margin: 15px 0;
+        }
+        .password-screen button {
+            background: #8a2be2;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .admin-panel {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .header {
+            background: #131921;
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+        .header button {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .tabs {
+            display: flex;
+            background: white;
+            border-bottom: 2px solid #eee;
+        }
+        .tab {
+            padding: 12px 25px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-weight: bold;
+            color: #666;
+            border-bottom: 3px solid transparent;
+        }
+        .tab.active { color: #8a2be2; border-bottom-color: #8a2be2; }
+        
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+        }
+        
+        .form-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .form-card h2 { color: #8a2be2; margin-bottom: 20px; text-align: center; }
+        
+        .form-group { margin-bottom: 15px; }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .form-group input:focus { border-color: #8a2be2; outline: none; }
+        
+        .image-preview {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 10px 0;
+            background: #f9f9f9;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            margin: 5px;
+            color: white;
+        }
+        .btn-purple { background: #8a2be2; }
+        .btn-green { background: #25d366; }
+        .btn-red { background: #ff4444; }
+        .btn-orange { background: #ff6600; }
+        .btn-blue { background: #2196F3; }
+        .btn:hover { opacity: 0.85; }
+        
+        .products-list {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .search-bar {
+            padding: 15px;
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .product-row {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            gap: 10px;
+        }
+        .product-row:hover { background: #f9f5ff; }
+        .product-row img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            border-radius: 6px;
+            background: #f9f9f9;
+        }
+        .product-info { flex: 1; }
+        .product-name { font-weight: bold; }
+        .product-price { color: #8a2be2; font-weight: bold; }
+        .product-actions { display: flex; gap: 5px; }
+        .btn-sm {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            color: white;
+        }
+        .btn-sm.edit { background: #2196F3; }
+        .btn-sm.del { background: #ff4444; }
+        
+        .message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            display: none;
+        }
+        .message.success { background: #25d366; }
+        .message.error { background: #ff4444; }
+        .message.info { background: #2196F3; }
+        
+        @media (max-width: 768px) {
+            .product-row { flex-wrap: wrap; }
+            .product-actions { width: 100%; justify-content: flex-end; }
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-  <div class="hero">
-    <h1>﴿ وَمَا تُقَدِّمُوا لِأَنفُسِكُم مِّنْ خَيْرٍ تَجِدُوهُ عِندَ اللَّهِ ﴾</h1>
-    <p>﴿الَّذِينَ يُنْفِقُونَ أَمْوَالَهُمْ بِاللَّيْلِ وَالنَّهَارِ سِرًّا وَعَلَانِيَةً فَلَهُمْ أَجْرُهُمْ عِنْدَ رَبِّهِمْ وَلَا خَوْفٌ عَلَيْهِمْ وَلَا هُمْ يَحْزَنُونَ﴾</p>
-  
-    <div class="lantern-container">
-      <img
-        src="https://www.freeiconspng.com/uploads/ramadan-lantern-for-design-png-13.png"
-        alt="فانوس رمضان كريم"
-        class="lantern"
-        loading="lazy"
-        onerror="this.src='https://www.clipartmax.com/png/middle/236-2366075_lamp-clipart-ramadan-ramadan-lantern-png.png';"
-      >
+
+    <!-- شاشة كلمة السر -->
+    <div class="password-screen" id="passwordScreen">
+        <h1>🔐 لوحة تحكم جنة</h1>
+        <p>أدخل كلمة السر للدخول</p>
+        <input type="password" id="passwordInput" placeholder="كلمة السر" autofocus>
+        <button onclick="checkPassword()">🔓 دخول</button>
+        <p id="passwordError" style="color:#ff4444;display:none;margin-top:10px;">❌ كلمة سر خاطئة</p>
     </div>
-  </div>
 
-  <div class="card">
-    <h2>سيب طلبك أو احتياجك</h2>
-  
-    <form id="helpForm">
-      <label for="name">الاسم <span style="color:#f87171;">*</span></label>
-      <input type="text" id="name" placeholder="اكتب اسمك" required>
-
-      <label for="phone">رقم الموبايل <span style="color:#f87171;">*</span></label>
-      <input type="tel" id="phone" placeholder="اكتب رقم التواصل" required pattern="[0-9]{10,11}">
-
-      <label for="address">العنوان بالتفصيل</label>
-      <input type="text" id="address" placeholder="..." required>
-
-      <label for="cash">رقم فودافون كاش (اختياري)</label>
-      <input type="text" id="cash" placeholder="01xxxxxxxx" pattern="[0-9]{10,11}">
-
-      <label for="need">إيه اللي محتاجه بالضبط؟ أو مساعدة شخص آخر (باختصار)</label>
-      <textarea id="need" placeholder="أحتاج مساعدة في ... / ..." required></textarea>
-
-      <button type="button" id="submitBtn">إرسال الطلب</button>
-      <div id="msg"></div>
-    </form>
-
-    <div class="note">
-      بياناتك في أمان تام • نستخدمها فقط للمساعدتك<br>
-      رمضان كريم وكل عام وأنتم بخير <span class="heart">🤍</span>
+    <!-- لوحة التحكم -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="header">
+            <span>📦 إدارة منتجات جنة</span>
+            <button onclick="logout()">🚪 خروج</button>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('list')">📋 المنتجات</button>
+            <button class="tab" onclick="switchTab('add')">➕ إضافة جديد</button>
+        </div>
+        
+        <div class="content">
+            <!-- قائمة المنتجات -->
+            <div id="tab-list">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="🔍 بحث..." oninput="loadProductsList()">
+                </div>
+                <div class="products-list" id="productsList">
+                    <div style="text-align:center;padding:40px;">جاري التحميل...</div>
+                </div>
+            </div>
+            
+            <!-- إضافة / تعديل منتج -->
+            <div id="tab-add" style="display:none;">
+                <div class="form-card">
+                    <h2 id="formTitle">➕ إضافة منتج جديد</h2>
+                    <input type="hidden" id="editId">
+                    
+                    <div class="form-group">
+                        <label>اسم المنتج</label>
+                        <input type="text" id="productName" placeholder="مثال: شاحن 45 واط#">
+                        <small style="color:#666;">الرموز: # شحن مجاني | & عرض | $ مميز | .. جديد | @ غير متوفر | (رقم) كمية</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>السعر</label>
+                        <input type="number" id="productPrice" placeholder="مثال: 85" step="0.01">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>رابط الصورة</label>
+                        <input type="text" id="productImage" placeholder="https://example.com/image.jpg" oninput="previewImage()">
+                        <div style="text-align:center;">
+                            <img id="imagePreview" class="image-preview" src="https://via.placeholder.com/150?text=معاينة" onerror="this.src='https://via.placeholder.com/150?text=خطأ+في+الصورة'">
+                        </div>
+                        <small style="color:#666;">الصق رابط الصورة وهتظهر المعاينة تلقائي</small>
+                    </div>
+                    
+                    <div style="text-align:center;">
+                        <button class="btn btn-green" onclick="saveProduct()">💾 حفظ المنتج</button>
+                        <button class="btn btn-orange" onclick="clearForm()">🔄 مسح</button>
+                        <button class="btn btn-purple" onclick="switchTab('list')">📋 عرض المنتجات</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+    
+    <div class="message" id="message"></div>
 
-<script>
-const form = document.getElementById("helpForm");
-const msg = document.getElementById("msg");
-const btn = document.getElementById("submitBtn");
-
-btn.addEventListener("click", async function(e) {
-  e.preventDefault();
-
-  const name = document.getElementById("name").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-
-  if (!name) {
-    msg.style.color = "#f87171";
-    msg.textContent = "من فضلك اكتب اسمك";
-    document.getElementById("name").focus();
-    return;
-  }
-
-  if (!phone || phone.length < 10) {
-    msg.style.color = "#f87171";
-    msg.textContent = "من فضلك اكتب رقم الموبايل صح (10 أو 11 رقم)";
-    document.getElementById("phone").focus();
-    return;
-  }
-
-  btn.disabled = true;
-  msg.style.color = "#fde047";
-  msg.textContent = "جاري إرسال طلبك... يرجى الانتظار";
-
-  const data = {
-    name: name,
-    phone: phone,
-    address: document.getElementById("address").value.trim() || "غير محدد",
-    cash: document.getElementById("cash").value.trim() || "غير محدد",
-    need: document.getElementById("need").value.trim(),
-    timestamp: new Date().toLocaleString("ar-EG")
-  };
-
-  try {
-    await fetch(
-      "https://script.google.com/macros/s/AKfycbx4OwccJ7OMbcn-EoOQjWMb7sTYvdSv6DJCb1mYXw-umKJyakXC8ojlFjVq11hYUFbdqg/exec",
-      {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(data)
-      }
-    );
-    msg.style.color = "#34d399";
-    msg.innerHTML = "تم استلام طلبك بنجاح<br>ربنا يتقبل منا ومنكم صالح الأعمال في رمضان 🤍";
-    form.reset();
-  } catch (err) {
-    console.error(err);
-    msg.style.color = "#f87171";
-    msg.textContent = "حصل خطأ في الإرسال.. تأكد من الإنترنت وحاول مرة أخرى";
-  } finally {
-    btn.disabled = false;
-  }
-});
-</script>
+    <script>
+        const SUPABASE_URL = "https://izecethoklmexltjoltu.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_KTkAecImeOYjb8JmB4GSyQ_f0wdSyRh";
+        const ADMIN_PASSWORD = "010065";
+        
+        let products = [];
+        
+        // ==================== كلمة السر ====================
+        function checkPassword() {
+            if (document.getElementById('passwordInput').value === ADMIN_PASSWORD) {
+                document.getElementById('passwordScreen').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'flex';
+                sessionStorage.setItem('admin_logged_in', 'true');
+                loadProductsList();
+            } else {
+                document.getElementById('passwordError').style.display = 'block';
+            }
+        }
+        
+        function logout() {
+            sessionStorage.removeItem('admin_logged_in');
+            location.reload();
+        }
+        
+        if (sessionStorage.getItem('admin_logged_in') === 'true') {
+            document.getElementById('passwordScreen').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'flex';
+            loadProductsList();
+        }
+        
+        document.getElementById('passwordInput').addEventListener('keydown', e => {
+            if (e.key === 'Enter') checkPassword();
+        });
+        
+        // ==================== التبويبات ====================
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('tab-list').style.display = tab === 'list' ? 'block' : 'none';
+            document.getElementById('tab-add').style.display = tab === 'add' ? 'block' : 'none';
+            if (tab === 'list') loadProductsList();
+        }
+        
+        // ==================== عرض المنتجات ====================
+        async function loadProductsList() {
+            const search = document.getElementById('searchInput')?.value?.toLowerCase() || '';
+            
+            try {
+                let url = `${SUPABASE_URL}/rest/v1/products?select=*&order=id.desc&limit=200`;
+                if (search) url += `&name=ilike.*${search}*`;
+                
+                const response = await fetch(url, {
+                    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+                });
+                
+                products = await response.json();
+                
+                const container = document.getElementById('productsList');
+                
+                if (products.length === 0) {
+                    container.innerHTML = '<div style="text-align:center;padding:40px;color:#666;">لا توجد منتجات</div>';
+                    return;
+                }
+                
+                container.innerHTML = products.map(p => `
+                    <div class="product-row">
+                        <img src="${p.image || 'https://via.placeholder.com/50?text=🖼️'}" 
+                             onerror="this.src='https://via.placeholder.com/50?text=🖼️'" 
+                             loading="lazy">
+                        <div class="product-info">
+                            <div class="product-name">${p.name || 'بدون اسم'}</div>
+                            <div class="product-price">${parseFloat(p.price || 0).toFixed(2)} جنيه</div>
+                            <small style="color:#999;">ID: ${p.id}</small>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-sm edit" onclick="editProduct(${p.id})">✏️ تعديل</button>
+                            <button class="btn-sm del" onclick="deleteProduct(${p.id})">🗑️ حذف</button>
+                        </div>
+                    </div>
+                `).join('');
+                
+            } catch (error) {
+                document.getElementById('productsList').innerHTML = 
+                    '<div style="text-align:center;padding:40px;color:#ff4444;">❌ فشل التحميل</div>';
+            }
+        }
+        
+        // ==================== تعديل منتج ====================
+        async function editProduct(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+            
+            document.getElementById('editId').value = product.id;
+            document.getElementById('productName').value = product.name;
+            document.getElementById('productPrice').value = product.price;
+            document.getElementById('productImage').value = product.image || '';
+            document.getElementById('formTitle').textContent = '✏️ تعديل منتج (ID: ' + product.id + ')';
+            
+            previewImage();
+            switchTab('add');
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab')[1].classList.add('active');
+        }
+        
+        // ==================== حفظ (إضافة أو تعديل) ====================
+        async function saveProduct() {
+            const id = document.getElementById('editId').value;
+            const name = document.getElementById('productName').value.trim();
+            const price = parseFloat(document.getElementById('productPrice').value) || 0;
+            const image = document.getElementById('productImage').value.trim() || 'https://via.placeholder.com/200?text=صورة+منتج';
+            
+            if (!name) { showMessage('❌ يرجى إدخال اسم المنتج', 'error'); return; }
+            if (price <= 0) { showMessage('❌ يرجى إدخال سعر صحيح', 'error'); return; }
+            
+            try {
+                let response;
+                
+                if (id) {
+                    // تعديل منتج موجود
+                    response = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'apikey': SUPABASE_KEY,
+                            'Authorization': `Bearer ${SUPABASE_KEY}`,
+                            'Content-Type': 'application/json',
+                            'Prefer': 'return=minimal'
+                        },
+                        body: JSON.stringify({ name, price, image })
+                    });
+                } else {
+                    // إضافة منتج جديد
+                    response = await fetch(`${SUPABASE_URL}/rest/v1/products`, {
+                        method: 'POST',
+                        headers: {
+                            'apikey': SUPABASE_KEY,
+                            'Authorization': `Bearer ${SUPABASE_KEY}`,
+                            'Content-Type': 'application/json',
+                            'Prefer': 'return=minimal'
+                        },
+                        body: JSON.stringify({ name, price, image })
+                    });
+                }
+                
+                if (response.ok) {
+                    showMessage(id ? '✅ تم التعديل بنجاح' : '✅ تمت الإضافة بنجاح', 'success');
+                    clearForm();
+                    loadProductsList();
+                } else {
+                    const err = await response.text();
+                    showMessage('❌ فشل: ' + err, 'error');
+                }
+            } catch (error) {
+                showMessage('❌ خطأ: ' + error.message, 'error');
+            }
+        }
+        
+        // ==================== حذف منتج ====================
+        async function deleteProduct(id) {
+            const product = products.find(p => p.id === id);
+            if (!confirm(`حذف: ${product ? product.name : id}؟`)) return;
+            
+            try {
+                await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, {
+                    method: 'DELETE',
+                    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+                });
+                showMessage('✅ تم الحذف', 'success');
+                loadProductsList();
+            } catch (error) {
+                showMessage('❌ فشل الحذف', 'error');
+            }
+        }
+        
+        // ==================== معاينة الصورة ====================
+        function previewImage() {
+            const url = document.getElementById('productImage').value;
+            const preview = document.getElementById('imagePreview');
+            if (url) {
+                preview.src = url;
+            } else {
+                preview.src = 'https://via.placeholder.com/150?text=معاينة';
+            }
+        }
+        
+        // ==================== مسح الفورم ====================
+        function clearForm() {
+            document.getElementById('editId').value = '';
+            document.getElementById('productName').value = '';
+            document.getElementById('productPrice').value = '';
+            document.getElementById('productImage').value = '';
+            document.getElementById('imagePreview').src = 'https://via.placeholder.com/150?text=معاينة';
+            document.getElementById('formTitle').textContent = '➕ إضافة منتج جديد';
+        }
+        
+        // ==================== رسائل ====================
+        function showMessage(text, type) {
+            const msg = document.getElementById('message');
+            msg.textContent = text;
+            msg.className = 'message ' + type;
+            msg.style.display = 'block';
+            setTimeout(() => msg.style.display = 'none', 2500);
+        }
+        
+        // اختصارات
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && e.key === 's') { e.preventDefault(); saveProduct(); }
+        });
+        
+        // تحميل أولي
+        loadProductsList();
+    </script>
 </body>
 </html>
